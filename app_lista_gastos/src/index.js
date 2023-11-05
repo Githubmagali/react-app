@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import WebFont from 'webfontloader';
 import Contenedor from './elementos/Contenedor';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import EditarGasto from './componentes/EditarGasto';
 import GastosPorCategoria from './componentes/GastosPorCategoria';
 import InicioSesion from './componentes/InicioSesion';
 import ListaDeGastos from './componentes/ListaDeGastos';
 import RegistroUsuarios from './componentes/RegistroUsuarios';
-import { Helmet } from "react-helmet";
-import favi from './imagenes/logo.png';
+import {Helmet} from "react-helmet";
+import favicon from './imagenes/logo.png';
 import Fondo from './elementos/Fondo';
 
 
@@ -27,7 +27,7 @@ const Index = ()=>{
   return(
     <>
     <Helmet>
-      <link rel="shortcut icon" href={favi} type="image/x-icon"/>
+      <link rel="shortcut icon" href={favicon} type="image/x-icon"/>
       <title>Estamos dentro de Helmet!</title>
     </Helmet>
 
