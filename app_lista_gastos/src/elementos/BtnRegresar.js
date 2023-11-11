@@ -1,9 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {ReactComponent as IconoFlecha} from './../imagenes/flecha.svg';
-import { useNavigate } from 'react-router-dom';
-
-
+import {useNavigate} from 'react-router-dom';
 
 const Btn = styled.button`
     display: block;
@@ -34,15 +32,12 @@ const Icono = styled(IconoFlecha)`
     fill: #fff;
 `;
 
-
 const BtnRegresar = ({ruta = '/'}) => {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    return (
-        <Btn onClick={() => navigate(ruta)}>
-           <Icono/>
-        </Btn>
-    );
+	return (
+		<Btn onClick={() => navigate(ruta)}><Icono /></Btn>
+	);
 }
-
+ 
 export default BtnRegresar;

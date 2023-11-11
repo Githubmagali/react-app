@@ -1,7 +1,4 @@
-import styled from 'styled-components';
-
-
-
+import styled from "styled-components";
 
 const Contenedor = styled.div`
     background: #fff;

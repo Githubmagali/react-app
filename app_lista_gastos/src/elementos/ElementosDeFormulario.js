@@ -1,10 +1,5 @@
-import styled from "styled-components";
-import theme from "../theme";
-
-
-
-
-
+import styled from 'styled-components';
+import theme from '../theme';
 
 const ContenedorFiltros = styled.div`
     display: flex;
@@ -23,7 +18,6 @@ const ContenedorFiltros = styled.div`
  
 const Formulario = styled.form`
     padding: 0 2.5rem; /* 40px */
- 
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -66,5 +60,5 @@ const ContenedorBoton = styled.div`
     margin: 2.5rem 0;  /* 40px */
 `;
 
+export {ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton};
 
-export { ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton};

@@ -1,5 +1,3 @@
-import styled from "styled-components"
-
 const theme = {
     fondo: '#F9F9F9',
     colorPrimario: '#5B69E2',
