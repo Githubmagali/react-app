@@ -6,7 +6,9 @@ import { Formulario, Input, ContenedorBoton } from "./../elementos/ElementosDeFo
 import { ReactComponent as SvgLogin } from "./../imagenes/registro.svg";
 import styled from "styled-components";
 import { auth } from "./../firebase/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Alerta from "../elementos/Alerta";
 
 const Svg = styled(SvgLogin)`
   width: 100%;
@@ -15,10 +17,12 @@ const Svg = styled(SvgLogin)`
 `;
 
 const RegistroUsuarios = () => {
+  const navigate = useNavigate();
   const [correo, establecerCorreo] = useState("");
   const [password, establecerPassword] = useState("");
   const [password2, establecerPassword2] = useState("");
-  const [error, setError] = useState(null);
+  const [estadoAlerta, cambiarEstadoAlerta] = useState(false);
+  const [alerta, cambiarAlerta] = useState({});
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -38,44 +42,60 @@ const RegistroUsuarios = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    cambiarEstadoAlerta(true);
+    cambiarAlerta({});
+  
     // Validación del lado del cliente
     const expresionRegular = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
     if (!expresionRegular.test(correo)) {
-      console.log("Error en el correo electrónico");
+      cambiarEstadoAlerta(true);
+      cambiarAlerta({
+        tipo: 'error',
+        mensaje:'Ingrese un correo válido'
+      });
       return;
     }
     if (correo === "" || password === "" || password2 === "") {
-      console.log("Datos incompletos");
+      cambiarEstadoAlerta(true);
+      cambiarAlerta({
+        tipo: 'error',
+        mensaje:'complete todos los campos'
+      });
       return;
     }
     if (password !== password2) {
-      console.log("Las contraseñas no coinciden");
+      cambiarEstadoAlerta(true);
+      cambiarAlerta({
+        tipo: 'error',
+        mensaje:'La contraseñas no coinciden'
+      });
       return;
     }
 
     try {
       // Registro de usuario con Firebase
       await createUserWithEmailAndPassword(auth, correo, password);
-      console.log("Usuario creado con éxito");
+      navigate('/');
       // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
     } catch (error) {
-      let mensaje;
+      cambiarEstadoAlerta(true);
+
+      let mensaje0;
       switch(error.code){
         case 'auth/invalid-password':
-            mensaje = 'La contraseña tiene que ser de al menos 6 caracteres.'
+            mensaje0 = 'La contraseña tiene que ser de al menos 6 caracteres.'
             break;
         case 'auth/email-already-in-use':
-            mensaje = 'Ya existe una cuenta con el correo electrónico proporcionado.'
+            mensaje0 = 'Ya existe una cuenta con el correo electrónico proporcionado.'
         break;
         case 'auth/invalid-email':
-            mensaje = 'El correo electrónico no es válido.'
+            mensaje0 = 'El correo electrónico no es válido.'
         break;
         default:
-            mensaje = 'Hubo un error al intentar crear la cuenta.'
+            mensaje0 = 'Hubo un error al intentar crear la cuenta.'
         break;
     }
-      
+      cambiarAlerta({tipo: 'error', mensaje: mensaje0});
     }
   };
 
@@ -104,7 +124,13 @@ const RegistroUsuarios = () => {
           </Boton>
         </ContenedorBoton>
       </Formulario>
-      {error && <p>{error}</p>}
+
+      <Alerta 
+      tipo={alerta.tipo}
+      mensaje={alerta.mensaje}
+      estadoAlerta={estadoAlerta}
+      cambiarEstadoAlerta={cambiarEstadoAlerta}/>
+
     </>
   );
 };

@@ -1,0 +1,15 @@
+input {
+    width: 15px; /* Ajusta el ancho según tus necesidades */
+    
+    /* Reduce la altura y el relleno interno para hacerlo más plano */
+    height: 30px; /* Ajusta la altura según tus necesidades */
+    padding: 5px; /* Ajusta el relleno interno según tus necesidades */
+    
+    /* Otros estilos */
+    border: 1px solid #ccc; /* Ajusta el color y grosor del borde según tus necesidades */
+    border-radius: 8px; /* Ajusta el radio de los bordes según tus necesidades */
+    box-sizing: border-box; /* Asegura que el ancho y alto incluyan el relleno y el borde */
+  }
+  
+  /* Otros estilos para el input, si es necesario */
+  
