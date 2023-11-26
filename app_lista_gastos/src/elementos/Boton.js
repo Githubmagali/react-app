@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const Boton = styled(Link)` 
+const Boton = styled(Link)`
     background: ${(props) => props.primario ? '#5B69E2' : '#000'};
     width: ${(props) => props.conIcono ? '15.62rem' : 'auto'}; /* 250px */
     margin-left: 1.25rem; /* 20px */
@@ -27,4 +27,3 @@ const Boton = styled(Link)`
 `;
 
 export default Boton;
-

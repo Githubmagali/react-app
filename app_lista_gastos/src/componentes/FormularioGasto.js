@@ -44,6 +44,7 @@ const FormularioGasto = () => {
           cantidad: inputCantidad,
           fecha: getUnixTime(fecha),
           uidUsuario: usuario.uid
+          
         })
         //.then regresamos a la promesa que resolvimos
         .then(()=>{

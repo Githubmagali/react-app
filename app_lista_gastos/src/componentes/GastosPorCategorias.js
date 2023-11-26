@@ -2,6 +2,7 @@ import React from "react";
 import {Header, Titulo} from './../elementos/Header';
 import { Helmet } from "react-helmet";
 import BtnRegresar from "../elementos/BtnRegresar";
+import BarraTotalGastado from "./BarraTotalGastado";
 
 
 const GastosPorCategorias = ()=>{
@@ -16,6 +17,7 @@ const GastosPorCategorias = ()=>{
           <Titulo> Gastos por categoria</Titulo>
       
       </Header>
+      <BarraTotalGastado />
       </>
     );
   }
