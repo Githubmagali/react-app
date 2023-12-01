@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from './../firebase/firebaseConfig';
 import { useAuth } from './../contextos/AuthContext';
-import { collection, onSnapshot, query, orderBy, where, limit } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, where, limit, startAfter } from "firebase/firestore";
 
 const useObtenerGastos = () => {
   // Estado local
@@ -9,6 +9,29 @@ const useObtenerGastos = () => {
   const [gastos, cambiarGastos] = useState([]);
   const [ultimoGasto, cambiarUltimoGasto]= useState(null);
   const [hayMasPorCargar, cambiarHayMasPorCargar] = useState(false);
+
+
+  const obtenerMasGastos = ()=>{
+    const consulta = query(
+      collection(db, 'gastos'),
+      where('uidUsuario', '==', usuario.uid),
+      orderBy('fecha', 'desc'),
+      limit(10),
+      startAfter(ultimoGasto)
+    );
+    onSnapshot(consulta, (snapshot)=>{
+      if(snapshot.docs.length > 0){
+        cambiarUltimoGasto(snapshot.docs[snapshot.docs.length -1]);
+
+        cambiarGastos(gastos.concat(snapshot.docs.map((gasto)=>{
+return{...gasto.data(), id: gasto.id}
+        })))
+      }else{
+        cambiarHayMasPorCargar(false);
+      }
+    }, error=>{console.log(error)});
+  }
+  
 
   // Efecto secundario que se ejecuta cuando cambia el usuario
   useEffect(() => {
@@ -34,8 +57,7 @@ const useObtenerGastos = () => {
         cambiarGastos(
           snapshot.docs.map((gasto) => {
             return { ...gasto.data(), id: gasto.id };
-          })
-        );
+          }));
         // Actualiza el estado de los gastos con los datos de todos los documentos de la consulta,
         // asignándoles un campo 'id' igual al ID del documento en Firestore
       });
@@ -45,7 +67,7 @@ const useObtenerGastos = () => {
   }, [usuario]); // La dependencia 'usuario' asegura que el efecto se ejecute cuando cambia el usuario
 
   // Devuelve el estado y funciones necesarios para usar en otros componentes
-  return [gastos, useObtenerGastos, hayMasPorCargar];
+  return [gastos, obtenerMasGastos, hayMasPorCargar];
 }
 
 export default useObtenerGastos;

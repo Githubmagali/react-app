@@ -18,7 +18,7 @@ const BotonCerrarSesion = ()=>{
      
     }   
      return(
-        <Boton  iconoGrande as="button" onClick={cerrarSesion}>
+        <Boton  $iconoGrande={true} as="button" onClick={cerrarSesion}>
             <IconoCerrarSesion />
         </Boton>
     );
