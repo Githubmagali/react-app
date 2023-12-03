@@ -16,7 +16,7 @@ const useObtenerGastos = () => {
       collection(db, 'gastos'),
       where('uidUsuario', '==', usuario.uid),
       orderBy('fecha', 'desc'),
-      limit(10),
+      limit(3),
       startAfter(ultimoGasto)
     );
     onSnapshot(consulta, (snapshot)=>{

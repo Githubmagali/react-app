@@ -15,6 +15,7 @@ import favicon from './imagenes/login.svg';
 import Fondo from './elementos/Fondo';
 import { AuthProvider } from './contextos/AuthContext';
 import RutaProtegida from './componentes/RutaPrivada';
+import { TotalGastadoProvider } from './contextos/TotalGastadoEnElMes';
 
 
 WebFont.load({
@@ -35,6 +36,7 @@ const Index = () => {
       </Helmet>
 
       <AuthProvider>
+        <TotalGastadoProvider>
         <BrowserRouter>
           <Contenedor>
             <Routes>
@@ -71,6 +73,7 @@ const Index = () => {
             </Routes>
           </Contenedor>
         </BrowserRouter>
+        </TotalGastadoProvider>
       </AuthProvider>
 
       <Fondo />

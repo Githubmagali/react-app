@@ -119,7 +119,8 @@ const FormularioGasto = ({gasto}) => {
         <InputGrande type="text" name="valor" id="valor" placeholder="$0.00" value={inputCantidad} onChange={handleChange} />
       </div>
       <ContenedorBoton>
-        <Boton as="button" type="submit">Agregar gasto <IconoPlus /></Boton>
+        <Boton as="button" type="submit">
+        {gasto ? 'Editar gasto' : 'Agregar gasto'} <IconoPlus /></Boton>
       </ContenedorBoton>
       <Alerta
         tipo={alerta.tipo}
